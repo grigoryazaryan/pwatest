@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <title>Calorie Calculator</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#111827" />
-  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#111827"/>
+  <link rel="manifest" href="manifest.webmanifest"/>
 
   <style>
       :root {
@@ -15,11 +15,14 @@
           --card-bg: #111827;
           --text: #e5e7eb;
           --accent: #3b82f6;
-          --accent-soft: rgba(59,130,246,0.15);
+          --accent-soft: rgba(59, 130, 246, 0.15);
           --border: #1f2937;
           --danger: #f97373;
       }
-      * { box-sizing: border-box; }
+
+      * {
+          box-sizing: border-box;
+      }
 
       body {
           margin: 0;
@@ -39,9 +42,8 @@
           border-radius: 20px;
           padding: 20px 18px 18px;
           border: 1px solid var(--border);
-          box-shadow:
-                  0 18px 40px rgba(0,0,0,0.75),
-                  0 0 0 1px rgba(15,23,42,0.8);
+          box-shadow: 0 18px 40px rgba(0, 0, 0, 0.75),
+          0 0 0 1px rgba(15, 23, 42, 0.8);
       }
 
       .header {
@@ -50,10 +52,12 @@
           justify-content: space-between;
           margin-bottom: 18px;
       }
+
       .title {
           font-size: 1.1rem;
           font-weight: 600;
       }
+
       .subtitle {
           font-size: 0.8rem;
           color: #9ca3af;
@@ -63,7 +67,7 @@
           font-size: 0.7rem;
           padding: 4px 8px;
           border-radius: 999px;
-          border: 1px solid rgba(148,163,184,0.4);
+          border: 1px solid rgba(148, 163, 184, 0.4);
           color: #e5e7eb;
           text-transform: uppercase;
           letter-spacing: 0.06em;
@@ -89,13 +93,14 @@
           background: radial-gradient(circle at top left, #111827 0, #020617 55%);
           border-radius: 12px;
           padding: 8px 10px;
-          border: 1px solid rgba(31,41,55,0.9);
+          border: 1px solid rgba(31, 41, 55, 0.9);
       }
 
       .field-row {
           display: flex;
           gap: 8px;
       }
+
       .field-row > .field {
           flex: 1;
       }
@@ -105,15 +110,15 @@
           padding: 7px 8px;
           font-size: 0.85rem;
           border-radius: 8px;
-          border: 1px solid rgba(55,65,81,0.9);
-          background: rgba(15,23,42, 0.85);
+          border: 1px solid rgba(55, 65, 81, 0.9);
+          background: rgba(15, 23, 42, 0.85);
           color: #e5e7eb;
           outline: none;
       }
 
       input[type="number"]:focus, select:focus {
           border-color: var(--accent);
-          box-shadow: 0 0 0 1px rgba(37,99,235,0.5);
+          box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.5);
       }
 
       .hint {
@@ -132,24 +137,22 @@
           cursor: pointer;
           background: radial-gradient(circle at 10% 0, #2563eb 0, #0ea5e9 32%, #22c55e 90%);
           color: white;
-          box-shadow:
-                  0 12px 20px rgba(37,99,235,0.35),
-                  0 0 0 1px rgba(8,47,73,0.8);
+          box-shadow: 0 12px 20px rgba(37, 99, 235, 0.35),
+          0 0 0 1px rgba(8, 47, 73, 0.8);
       }
 
       button:active {
           transform: translateY(1px);
-          box-shadow:
-                  0 6px 15px rgba(37,99,235,0.45),
-                  0 0 0 1px rgba(8,47,73,0.8);
+          box-shadow: 0 6px 15px rgba(37, 99, 235, 0.45),
+          0 0 0 1px rgba(8, 47, 73, 0.8);
       }
 
       .result-card {
           margin-top: 8px;
           border-radius: 14px;
           padding: 10px 11px;
-          background: radial-gradient(circle at top right, rgba(59,130,246,0.15) 0, #020617 60%);
-          border: 1px solid rgba(37,99,235,0.4);
+          background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.15) 0, #020617 60%);
+          border: 1px solid rgba(37, 99, 235, 0.4);
           font-size: 0.85rem;
       }
 
@@ -181,7 +184,7 @@
 
       .result-grid {
           display: grid;
-          grid-template-columns: repeat(3, minmax(0,1fr));
+          grid-template-columns: repeat(3, minmax(0, 1fr));
           gap: 6px;
           font-size: 0.75rem;
       }
@@ -189,8 +192,8 @@
       .result-pill {
           padding: 5px 7px;
           border-radius: 10px;
-          background: rgba(15,23,42,0.85);
-          border: 1px solid rgba(55,65,81,0.9);
+          background: rgba(15, 23, 42, 0.85);
+          border: 1px solid rgba(55, 65, 81, 0.9);
       }
 
       .result-pill-label {
@@ -219,11 +222,15 @@
     <div class="chip">Offline PWA</div>
   </header>
 
+  <button id="installBtn" style="display:none; margin-bottom:10px;">
+    Install app
+  </button>
+
   <form id="calorie-form" novalidate>
     <div class="field-row">
       <div class="field">
         <label for="age">Age</label>
-        <input id="age" type="number" min="10" max="100" required placeholder="28" />
+        <input id="age" type="number" min="10" max="100" required placeholder="28"/>
       </div>
 
       <div class="field">
@@ -238,13 +245,13 @@
     <div class="field-row">
       <div class="field">
         <label for="weight">Weight (kg)</label>
-        <input id="weight" type="number" min="30" max="250" step="0.1" required placeholder="75" />
+        <input id="weight" type="number" min="30" max="250" step="0.1" required placeholder="75"/>
         <div class="hint">Use kg (lbs ÷ 2.205)</div>
       </div>
 
       <div class="field">
         <label for="height">Height (cm)</label>
-        <input id="height" type="number" min="130" max="230" step="0.5" required placeholder="180" />
+        <input id="height" type="number" min="130" max="230" step="0.5" required placeholder="180"/>
         <div class="hint">Use cm (in × 2.54)</div>
       </div>
     </div>
@@ -312,7 +319,7 @@
     return Math.round(val);
   }
 
-  function calcBmr({ sex, weightKg, heightCm, age }) {
+  function calcBmr({sex, weightKg, heightCm, age}) {
     if (sex === 'male') {
       return 10 * weightKg + 6.25 * heightCm - 5 * age + 5;
     }
@@ -321,21 +328,31 @@
 
   function goalAdjustFactor(goal) {
     switch (goal) {
-      case 'loss-10': return 0.9;
-      case 'loss-20': return 0.8;
-      case 'gain-10': return 1.1;
-      case 'gain-15': return 1.15;
-      default: return 1.0; // maintain
+      case 'loss-10':
+        return 0.9;
+      case 'loss-20':
+        return 0.8;
+      case 'gain-10':
+        return 1.1;
+      case 'gain-15':
+        return 1.15;
+      default:
+        return 1.0; // maintain
     }
   }
 
   function goalDescription(goal) {
     switch (goal) {
-      case 'loss-10': return 'Mild fat loss (~10% deficit). Easier to stick to.';
-      case 'loss-20': return 'Faster fat loss (~20% deficit). Harder but quicker.';
-      case 'gain-10': return 'Slow lean gain (~10% surplus).';
-      case 'gain-15': return 'More aggressive gain (~15% surplus).';
-      default: return 'Calories to roughly maintain your current weight.';
+      case 'loss-10':
+        return 'Mild fat loss (~10% deficit). Easier to stick to.';
+      case 'loss-20':
+        return 'Faster fat loss (~20% deficit). Harder but quicker.';
+      case 'gain-10':
+        return 'Slow lean gain (~10% surplus).';
+      case 'gain-15':
+        return 'More aggressive gain (~15% surplus).';
+      default:
+        return 'Calories to roughly maintain your current weight.';
     }
   }
 
@@ -369,7 +386,7 @@
 
     errorEl.style.display = 'none';
 
-    const bmr = calcBmr({ sex, weightKg, heightCm, age });
+    const bmr = calcBmr({sex, weightKg, heightCm, age});
     const maintenance = bmr * activityFactor;
     const target = maintenance * goalAdjustFactor(goal);
 
@@ -399,6 +416,42 @@
       });
     });
   }
+  let deferredPrompt;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent the mini-infobar
+    e.preventDefault();
+    deferredPrompt = e;
+
+    const btn = document.getElementById('installBtn');
+    if (btn) {
+      btn.style.display = 'block';
+    }
+  });
+
+  const installBtn = document.getElementById('installBtn');
+  if (installBtn) {
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+
+      deferredPrompt.prompt();
+      const choice = await deferredPrompt.userChoice;
+
+      // After user responds, clear the saved event
+      deferredPrompt = null;
+
+      if (choice.outcome === 'accepted') {
+        installBtn.style.display = 'none';
+      }
+    });
+  }
+
+  window.addEventListener('appinstalled', () => {
+    const btn = document.getElementById('installBtn');
+    if (btn) {
+      btn.style.display = 'none';
+    }
+  });
 </script>
 </body>
 </html>
